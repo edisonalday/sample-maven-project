@@ -49,10 +49,10 @@ pipeline {
             }
             post {
                 success {
-                    echo 'Packaged application code deployment to Nexus approved.'
+                    echo 'Packaged successfully deployed to Development server.'
                 }
                 failure {
-                    echo 'Packaged application code deployment to Nexus failed - please visit test result.'
+                    echo 'Packaged deployment failed.'
                 }
             }
         }
