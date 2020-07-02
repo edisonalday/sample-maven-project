@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Package Application'){
             steps {
-                withMaven(maven : 'apache-maven-3.6.3') {
+                withMaven(maven : 'Maven 3.6.3') {
                 bat 'mvn clean package'
                 }
             }
