@@ -36,11 +36,9 @@ pipeline {
                 }
             }
         }
-        stage ('Deploy to Nexus'){
+        stage('Deploy to Nexus'){
             steps {
                 bat 'mvn clean package deploy'
-            }
-            steps {
                 nexusArtifactUploader artifacts: [[artifactId: 'maven-project', classifier: '', file: 'webapp/target/webapp.war', type: 'war']], credentialsId: 'nexusdeploymentrepo', groupId: 'com.example.maven-project', nexusUrl: '192.168.101.66:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0-SNAPSHOT'
             }
         }  
