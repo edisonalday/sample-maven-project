@@ -43,13 +43,12 @@ pipeline {
                 archiveArtifacts artifacts: '**/*.war', followSymlinks: false
             }
         }
+
         stage('Deploy to Development Server'){
             steps {
-                timeout(time:5, unit:'DAYS'){
-                    input message: 'Deploy package to Development server?', ok: 'Approve', submitter: 'Edison Alday'
-                }
-                copyArtifacts filter: '**/*.war', fingerprintArtifacts: true, projectName: 'package'
+                copyArtifacts filter: 'webapp/target/webapp.war', fingerprintArtifacts: true, projectName: 'Deploy to Nexus'
                 deploy adapters: [tomcat9(credentialsId: 'Tomcat', path: '', url: 'http://192.168.101.66:8080')], contextPath: null, onFailure: false, war: '**/*.war'
+                }
             }
             post {
                 success {
@@ -58,9 +57,7 @@ pipeline {
 
                 failure {
                     echo 'Deployment failed - please check application logs.'
-                }
             }
         }
-
     }
 }
