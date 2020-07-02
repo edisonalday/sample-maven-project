@@ -47,15 +47,7 @@ pipeline {
             steps {
                 copyArtifacts filter: 'webapp/target/webapp.war', fingerprintArtifacts: true, projectName: 'Deploy to Nexus'
                 deploy adapters: [tomcat9(credentialsId: 'Tomcat', path: '', url: 'http://192.168.101.66:8080')], contextPath: null, onFailure: false, war: '**/*.war'
-                }
             }
-            post {
-                success {
-                    echo 'Application successfully deployed.'
-                }
-                failure {
-                    echo 'Deployment failed - please check application logs.'   
-              }             
-          }
-     }
+        }
+    }
 }
