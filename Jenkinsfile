@@ -5,20 +5,30 @@ pipeline {
         jdk 'Java'
     }
     stages{
+        stage('Code Validation'){
+            steps {
+                bat 'mvn clean validate'
+            }
+        }
+        stage('Code Compilation'){
+            steps {
+                bat 'mvn clean compile'
+            }
+        }
+        stage('Unit Test'){
+            steps {
+                bat 'mvn clean test'
+            }
+        }
         stage('Package Application'){
             steps {
                 bat 'mvn clean package'
-            }
-            post {
-                success {
-                    echo 'Application code successfully packaged.'
-                }
             }
         }
         stage ('Deploy to Nexus'){
             steps {
                 timeout(time:5, unit:'DAYS'){
-                    input message: 'Approve deployment to Nexus?', ok: 'Approve', parameters: [choice(choices: ['Approved, Not Approved'], description: '', name: '')], submitter: 'Edison Alday'
+                    input message: 'Approve deployment to Nexus?', ok: 'Approve', description: '', name: '')]'
                     
                 }
                 build job: 'deploy-to-nexus'
