@@ -1,11 +1,12 @@
 pipeline {
     agent any
+    tools {
+        maven 'Maven'
+    }
     stages{
         stage('Package Application'){
             steps {
-                withMaven(maven : 'Maven 3.6.3') {
                 bat 'mvn clean package'
-                }
             }
             post {
                 success {
