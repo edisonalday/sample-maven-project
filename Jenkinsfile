@@ -18,7 +18,8 @@ pipeline {
         stage ('Deploy to Nexus'){
             steps {
                 timeout(time:5, unit:'DAYS'){
-                    input message:'Application deployment to  Nexus approved?'
+                    input message: 'Approve deployment to Nexus?', ok: 'Approve', parameters: [choice(choices: ['Approved, Not Approved'], description: '', name: '')], submitter: 'Edison Alday'
+                    
                 }
                 build job: 'deploy-to-nexus'
             }
