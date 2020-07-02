@@ -30,7 +30,6 @@ pipeline {
                 success {
                     echo 'Packaged application code deployment to Nexus approved.'
                 }
-
                 failure {
                     echo 'Packaged application code deployment to Nexus failed - please visit test result.'
                 }
@@ -54,9 +53,9 @@ pipeline {
                 success {
                     echo 'Application successfully deployed.'
                 }
-
                 failure {
-                    echo 'Deployment failed - please check application logs.'
+                    echo 'Deployment failed - please check application logs.'   
+                }             
             }
         }
     }
