@@ -35,7 +35,6 @@ pipeline {
                     echo 'Packaged application code deployment to Nexus failed - please visit test result.'
                 }
             }
-        }
         stage ('Deploy to Nexus'){
             steps {
                 bat 'mvn clean package deploy'
