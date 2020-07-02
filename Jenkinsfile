@@ -47,6 +47,14 @@ pipeline {
             steps {
                 deploy adapters: [tomcat9(credentialsId: 'Tomcat', path: '', url: 'http://192.168.101.66:8080')], contextPath: null, onFailure: false, war: 'webapp/target/webapp.war'
             }
+            post {
+                success {
+                    echo 'Packaged application code deployment to Nexus approved.'
+                }
+                failure {
+                    echo 'Packaged application code deployment to Nexus failed - please visit test result.'
+                }
+            }
         }
     }
 }
