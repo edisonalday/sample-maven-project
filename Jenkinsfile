@@ -55,8 +55,7 @@ pipeline {
                 }
                 failure {
                     echo 'Deployment failed - please check application logs.'   
-                }             
-            }
-        }
-    }
+              }             
+          }
+     }
 }
